@@ -1,9 +1,13 @@
+'use client'
+
 import ToastProvider from '@/context/toast.provider'
-import { AuthProvider } from '../context/authContext'
-import './globals.css'
+import '../globals.css'
 import 'react-toastify/dist/ReactToastify.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { AuthProvider } from '@/context/authContext'
+import { useAuthContext } from '@/context/hook'
+import { redirect } from 'next/navigation'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -12,11 +16,19 @@ export const metadata: Metadata = {
   description: 'Criado por matheusobarboza.',
 }
 
-export default function RootLayout({
+export default function AuthenticatedLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
+  const { isAuthenticated } = useAuthContext()
+
+  console.log('isAuthenticated', isAuthenticated)
+
+  if (!isAuthenticated) {
+    redirect('/')
+  }
 
   return (
     <html lang="en">

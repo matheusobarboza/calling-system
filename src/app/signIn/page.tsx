@@ -2,23 +2,35 @@
 
 import Link from "next/link";
 import { useState, FormEvent } from "react";
-import { PiEnvelopeBold, PiLockBold } from "react-icons/pi";
+import { PiCircleNotch, PiEnvelopeBold, PiLockBold } from "react-icons/pi";
 import CallingImage from '../../assets/calling2.png'
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useAuthContext } from "@/context/hook";
+import { AuthContext } from "@/context/authContext";
+import { sign } from "crypto";
 
 const SignIn = () => {
+  const { signIn, isLoadingAuth } = useAuthContext()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const router = useRouter()
 
-  const login = (e: FormEvent) => {
+  const login = async (e: FormEvent) => {
     e.preventDefault()
 
     if (email === '' || password === '') {
       alert('Por favor informe email e senha!')
+      return
     }
+
+    await signIn({
+      email, 
+      password})
+    
+      setEmail('')
+      setPassword('')
   }
 
   return (
@@ -52,7 +64,9 @@ const SignIn = () => {
               />
             </div>
           </div>
-          <button type="submit" className="border-2 border-green-500 text-green-500 rounded-full px-12 py-2 inline-block font-semibold hover:bg-green-500 hover:text-white transition-colors">Entrar</button>
+          <button type="submit" className="border-2 border-green-500 text-green-500 rounded-full px-12 py-2 inline-block font-semibold hover:bg-green-500 hover:text-white transition-colors">
+            {isLoadingAuth ? <PiCircleNotch className="m-2 animate-spin" /> : 'Entrar'}
+          </button>
         </form>
         <div className="w-2/5 bg-green-500 text-white rounded-tr-2xl rounded-br-2xl py-36 px-12">
           {/* <h2 className="text-3xl font-bold mb-2">Olá, Seja Bem Vindo</h2> */}
