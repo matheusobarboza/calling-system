@@ -1,4 +1,6 @@
-const Dashboard = () => {
+'use client'
+
+const Home = () => {
   return (
     <main>
       <h1>Dashboard</h1>
@@ -6,4 +8,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default Home

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { FormEvent, useState } from "react";
 import { PiEnvelopeBold, PiLockBold, PiUserBold, PiCircleNotch } from "react-icons/pi";
-import CallingImage from '../../assets/calling2.png'
+import CallingImage from '../../../assets/calling2.png'
 import Image from "next/image";
 import { useAuthContext } from "@/context/hook";
 

@@ -3,12 +3,10 @@
 import Link from "next/link";
 import { useState, FormEvent } from "react";
 import { PiCircleNotch, PiEnvelopeBold, PiLockBold } from "react-icons/pi";
-import CallingImage from '../../assets/calling2.png'
+import CallingImage from '../../../assets/calling2.png'
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/hook";
-import { AuthContext } from "@/context/authContext";
-import { sign } from "crypto";
 
 const SignIn = () => {
   const { signIn, isLoadingAuth } = useAuthContext()

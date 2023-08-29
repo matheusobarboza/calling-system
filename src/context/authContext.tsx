@@ -45,6 +45,7 @@ export const AuthProvider = ({ children }: IProps) => {
 
   const [user, setUser] = useState<IUser | null>(null)
   const [isLoadingAuth, setIsLoadingAuth] = useState(false)
+  console.log('user', user)
 
   const signIn = async ({ email, password }: ISignIn) => {
     setIsLoadingAuth(true)
@@ -66,7 +67,7 @@ export const AuthProvider = ({ children }: IProps) => {
         setUser(data)
         storageUser(data)
         setIsLoadingAuth(false)
-        replace('/dashboard')
+        replace('/')
         toast.success('Seja bem vindo(a)')
       })
       .catch(err => {
