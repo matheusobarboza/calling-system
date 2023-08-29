@@ -1,36 +1,26 @@
 'use client'
 
-import '../globals.css'
-import 'react-toastify/dist/ReactToastify.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { useRouter } from 'next/navigation'
 import { useAuthContext } from '@/context/hook'
-import { redirect } from 'next/navigation'
-
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata: Metadata = {
-  title: 'Sistema de chamados',
-  description: 'Criado por matheusobarboza.',
-}
+import Header from '@/components/Header'
 
 export default function AuthenticatedLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const { replace } = useRouter()
 
   const { isAuthenticated } = useAuthContext()
 
-  console.log('isAuthenticated', isAuthenticated)
-
   if (!isAuthenticated) {
-    redirect('/signIn')
+    replace('/signIn')
   }
 
   return (
-    <>
+    <section className='w-full min-h-screen flex'>
+      <Header />
       {children}
-    </>
+    </section>
   )
 }

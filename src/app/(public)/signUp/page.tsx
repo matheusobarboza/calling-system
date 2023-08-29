@@ -5,7 +5,7 @@ import { FormEvent, useState } from "react";
 import { PiEnvelopeBold, PiLockBold, PiUserBold, PiCircleNotch } from "react-icons/pi";
 import CallingImage from '../../../assets/calling2.png'
 import Image from "next/image";
-import { useAuthContext } from "@/context/hook";
+import { useAuthContext } from '../../../context/hook'
 
 const SignUp = () => {
   const { signUp, isLoadingAuth } = useAuthContext()
@@ -27,10 +27,6 @@ const SignUp = () => {
       email, 
       password
     })
-    
-      setName('')
-      setEmail('')
-      setPassword('')
   }
 
   return (
@@ -79,7 +75,7 @@ const SignUp = () => {
           </button>
         </form>
         <div className="w-2/5 bg-green-500 text-white rounded-tr-2xl rounded-br-2xl py-36 px-12">
-          <Image src={CallingImage} alt="Imagem da logo do sistema" className="w-auto h-auto" />
+          <Image src={CallingImage} alt="Imagem da logo do sistema" priority className="w-auto h-auto" />
           <div className="border-2 w-10 border-white inline-block mb-2" />
           <p className="mb-2">Já tem uma conta ?</p>
           <Link href="/signIn" className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-green-500 transition-colors">Faça seu Login</Link>

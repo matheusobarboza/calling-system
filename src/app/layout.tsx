@@ -1,9 +1,9 @@
-import ToastProvider from '@/context/toast.provider'
-import { AuthProvider } from '../context/authContext'
+
+import { AuthProvider } from '@/context/authContext'
 import './globals.css'
-import 'react-toastify/dist/ReactToastify.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import ToastProvider from '@/context/toast.provider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,14 +19,14 @@ export default function RootLayout({
 }) {
 
   return (
-    <html lang="en">
-      <body className={`${inter.className} flex flex-col items-center justify-center min-h-screen text-base font-sans py-2 bg-[#EFEFEF] no-underline list-none`}>
-        <AuthProvider>
+    <AuthProvider>
+      <html lang="en">
+        <body className={`${inter.className} flex flex-col items-center justify-center min-h-screen text-base font-sans bg-[#EFEFEF] no-underline list-none`}>
           <ToastProvider>
             {children}
           </ToastProvider>
-        </AuthProvider>
-      </body>
-    </html>
+        </body>
+      </html>
+    </AuthProvider>
   )
 }

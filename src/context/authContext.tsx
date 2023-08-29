@@ -1,8 +1,8 @@
 'use client'
 
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import { auth, db } from '../services/firebaseConnection'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
@@ -13,7 +13,7 @@ interface IAuthContext {
   signIn: (credentials: ISignIn) => Promise<void>
   signUp: (credentials: ISignUp) => Promise<void>
   isLoadingAuth: boolean
-  // logoutUser: () => Promise<void>
+  logout: () => Promise<void>
 }
 
 interface IUser {
@@ -41,11 +41,25 @@ interface IProps {
 export const AuthContext = createContext({} as IAuthContext)
 
 export const AuthProvider = ({ children }: IProps) => {
-  const { push, replace } = useRouter()
+  const router = useRouter()
 
   const [user, setUser] = useState<IUser | null>(null)
   const [isLoadingAuth, setIsLoadingAuth] = useState(false)
-  console.log('user', user)
+
+  useEffect(() => {
+    const loadUser = () => {
+      const storageUser = localStorage.getItem("@ticketsPRO")
+
+      if (storageUser) {
+        setUser(JSON.parse(storageUser))
+        setIsLoadingAuth(false)
+      }
+
+      setIsLoadingAuth(false)
+    }
+
+    loadUser()
+  }, [])
 
   const signIn = async ({ email, password }: ISignIn) => {
     setIsLoadingAuth(true)
@@ -67,7 +81,7 @@ export const AuthProvider = ({ children }: IProps) => {
         setUser(data)
         storageUser(data)
         setIsLoadingAuth(false)
-        replace('/')
+        router.replace('/')
         toast.success('Seja bem vindo(a)')
       })
       .catch(err => {
@@ -88,19 +102,19 @@ export const AuthProvider = ({ children }: IProps) => {
           name,
           avatarUrl: null,
         })
-        .then(() => {
-          let data = {
-            uid,
-            name,
-            email: res.user.email,
-            avatarUrl: null,
-          }
+          .then(() => {
+            let data = {
+              uid,
+              name,
+              email: res.user.email,
+              avatarUrl: null,
+            }
 
-          setUser(data)
-          setIsLoadingAuth(false)
-          replace('/signIn')
-          toast.success('Cadastrado com sucesso!')
-        })
+            setUser(data)
+            setIsLoadingAuth(false)
+            router.replace('/signIn')
+            toast.success('Cadastrado com sucesso!')
+          })
       })
       .catch(err => {
         console.log(err)
@@ -111,13 +125,20 @@ export const AuthProvider = ({ children }: IProps) => {
   const storageUser = (data: IUser) => {
     localStorage.setItem('@ticketsPRO', JSON.stringify(data))
   }
-  
+
+  const logout = async () => {
+    await signOut(auth)
+    localStorage.removeItem('@ticketsPRO')
+    setUser(null)
+  }
+
   return (
     <AuthContext.Provider value={{
       user,
       isAuthenticated: !!user,
       signIn,
       signUp,
+      logout,
       isLoadingAuth,
     }}>
       {children}
