@@ -18,7 +18,7 @@ export default function AuthenticatedLayout({
   }
 
   return (
-    <section className='w-full min-h-screen flex'>
+    <section className='w-full min-h-screen flex md:flex-col'>
       <Header />
       {children}
     </section>

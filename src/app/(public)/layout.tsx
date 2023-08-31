@@ -17,7 +17,7 @@ export default function PublicLayout({
   }
 
   return (
-    <section>
+    <section className='w-full'>
       {children}
     </section>
   )
