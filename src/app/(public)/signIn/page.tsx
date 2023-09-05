@@ -51,10 +51,10 @@ const SignIn = () => {
       <div className="bg-white rounded-2xl shadow-2xl flex w-2/3 items-center max-w-4xl">
         <form onSubmit={pathnameRoute === 'signIn' ? login : register} className="w-3/5 p-5 items-center">
           <div className="py-10">
-            <h2 className="text-3xl font-bold text-green-500 mb-2">
+            <h2 className="text-3xl font-bold text-[#181c2e] mb-2">
               {pathnameRoute === 'signIn' ? 'Faça seu Login' : 'Realize seu cadastro'}
             </h2>
-            <div className="border-2 w-10 border-green-500 inline-block mb-2" />
+            <div className="border-2 w-10 border-[#181c2e] inline-block mb-2" />
           </div>
           <div className="flex flex-col items-center justify-center">
             {pathnameRoute === 'signUp' && (
@@ -91,15 +91,15 @@ const SignIn = () => {
               />
             </div>
           </div>
-          <button type="submit" className="border-2 border-green-500 text-green-500 rounded-full px-12 py-2 inline-block font-semibold hover:bg-green-500 hover:text-white transition-colors">
+          <button type="submit" className="border-2 border-[#181c2e] text-[#181c2e] rounded-full px-12 py-2 inline-block font-semibold hover:bg-[#181c2e] hover:text-white transition-colors">
             {isLoadingAuth ? <PiCircleNotch className="m-2 animate-spin" /> : pathnameRoute === 'signIn' ? 'Entrar' : 'Cadastrar'}
           </button>
         </form>
-        <div className="w-2/5 bg-green-500 text-white rounded-tr-2xl rounded-br-2xl py-36 px-12">
+        <div className="w-2/5 bg-[#181c2e] text-white rounded-tr-2xl rounded-br-2xl py-36 px-12">
           <Image src={CallingImage} alt="Imagem da logo do sistema" priority className="w-auto h-auto" />
           <div className="border-2 w-10 border-white inline-block mb-2" />
           <p className="mb-2">Gerencie seus chamados da melhor forma!</p>
-          <button onClick={() => pathnameRoute === 'signIn' ? setPathnameRoute('signUp') : setPathnameRoute('signIn')} className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-green-500 transition-colors">
+          <button onClick={() => pathnameRoute === 'signIn' ? setPathnameRoute('signUp') : setPathnameRoute('signIn')} className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-[#181c2e] transition-colors">
             {pathnameRoute === 'signIn' ? 'Cadastre-se' : 'Faça seu login'}
           </button>
         </div>

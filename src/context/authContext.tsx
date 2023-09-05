@@ -14,12 +14,14 @@ interface IAuthContext {
   signUp: (credentials: ISignUp) => Promise<void>
   isLoadingAuth: boolean
   logout: () => Promise<void>
+  storageUser: (data: IUser) => void
+  setUser: (user: IUser) => void
 }
 
 interface IUser {
   uid: string
   name: string
-  email: string | null
+  email: string | null | undefined
   avatarUrl: string | null
 }
 
@@ -140,6 +142,8 @@ export const AuthProvider = ({ children }: IProps) => {
       signUp,
       logout,
       isLoadingAuth,
+      storageUser,
+      setUser,
     }}>
       {children}
     </AuthContext.Provider>

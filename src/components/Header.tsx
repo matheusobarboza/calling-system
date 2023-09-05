@@ -11,9 +11,9 @@ const Header = () => {
 
   return (
     <div className="bg-[#181c2e] h-screen overflow-auto flex flex-col items-center min-w-[200px] md:w-full md:h-auto md:relative">
-      <div className="py-8 bg-[url('../assets/cover.png')] bg-no-repeat bg-cover bg-center h-144 w-full flex justify-center md:hidden">
+      <div className="py-8 bg-[url('../assets/cover.png')] bg-no-repeat bg-cover bg-center h-144 w-full flex justify-center items-center md:hidden">
         {/* <Image src="https://sujeitoprogramador.com/steve.png" width={90} height={90} alt="Foto do usuário" className="drop-shadow-lg object-cover block m-auto rounded-full" /> */}
-        <Image src={user?.avatarUrl === null ? AvatarImg : user?.avatarUrl} alt="Foto do usuário" className="w-[90px] h-[90px] drop-shadow-lg object-cover block m-auto rounded-full" />
+        <Image src={user?.avatarUrl === null ? AvatarImg : user?.avatarUrl} alt="Foto do usuário" width={90} height={90} className="drop-shadow-lg block m-auto object-cover rounded-full" />
       </div>
 
       <div className="flex flex-col w-full text-white md:flex-row">
